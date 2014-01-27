@@ -11,9 +11,15 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
 
   has_secure_password
+  has_many :microposts, dependent: :destroy
 
   validates :password, length: { minimum: 6 }, presence: true
   validates :password_confirmation, presence: true
+
+  def feed
+    # This is preliminary. See "Following users" for the full implementation.
+    Micropost.where("user_id = ?", id)
+  end
 
   private
 
