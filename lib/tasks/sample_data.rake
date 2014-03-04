@@ -1,9 +1,10 @@
 namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
-    make_users
-    make_microposts
-    make_relationships
+    # make_users
+    # make_microposts
+    # make_relationships
+    make_secretaries
   end
 end
 
@@ -39,4 +40,11 @@ def make_relationships
   followers      = users[3..40]
   followed_users.each { |followed| user.follow!(followed) }
   followers.each      { |follower| follower.follow!(user) }
+end
+
+def make_secretaries
+  21.times do |n|
+    rank = n+1
+    Secretary.create!(rank: rank)
+  end
 end
