@@ -1,4 +1,6 @@
 SampleApp::Application.routes.draw do
+  get "secretaries/sec_problem"
+
   resources :users do
     member do
       get :following, :followers
@@ -12,7 +14,7 @@ SampleApp::Application.routes.draw do
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
 
-  root to: 'static_pages#home'
+  root to: 'secretaries#sec_problem'
 
   match '/signup',  to: 'users#new'
 
